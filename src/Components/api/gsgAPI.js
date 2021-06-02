@@ -6,12 +6,12 @@ export async function speciesSearch(term) {
     if (response.ok) {
         console.log(response);
         const jsonResponse =  await response.json();
-        console.log(jsonResponse);
         // only returns names, not null entries returned from the GBIF API (server side)
-        const namesArray = jsonResponse.map(item => {
+        const namesArray = jsonResponse.filter(item => {
             return item !== null;
         });
-        return namesArray;
+        const distinctNames = [...new Set(namesArray)]
+        return distinctNames;
     }else {
         return null;
     }

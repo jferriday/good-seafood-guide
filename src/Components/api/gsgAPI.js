@@ -28,6 +28,17 @@ export async function globalAssessment(species) {
     }
 }
 
+export async function globalStatus(species) {
+    const response = await fetch(encodeURI(`${endpoint}/redlist/global/${species}`));
+    if (response.ok) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        return jsonResponse;
+    }else{
+        return null;
+    }
+}
+
 export async function regionalAssessment(species, region) {
     const response = await fetch(encodeURI(`${endpoint}/redlist/threats/regional/${region}/${species}`));
     if (response.ok) {
@@ -38,6 +49,17 @@ export async function regionalAssessment(species, region) {
         return null;
     }
 };
+
+export async function regionalStatus(species, region) {
+    const response = await fetch(encodeURI(`${endpoint}/redlist/regional/${region}/${species}`));
+    if(response.ok) {
+        const jsonResponse = await response.json();
+        console.log(jsonResponse);
+        return jsonResponse;
+    } else {
+        return null;
+    }
+}
 
 
 

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { speciesSearch } from "../../api/gsgAPI";
 
+import {Grid, TextField, InputLabel, Input} from '@material-ui/core';
+import {Autocomplete} from  '@material-ui/lab';
+
 function Search(props) {
   const [region, setRegion] = useState();
   const [species, setSpecies] = useState();
@@ -47,8 +50,27 @@ function Search(props) {
 
   return (
     <div>
-      <label htmlFor="species-search">Species or common name </label>
-      <input type="text" id="species-search" value={sppSearchTerm} onChange={suggestName} />
+      <Grid container direction="column">    
+      {/* <input type="text" id="species-search" placeholder="Enter a species or genus" value={sppSearchTerm} onChange={suggestName} /> */}
+      <Autocomplete
+      id="species-autocomplete"
+      style={{width: 'auto'}}
+      options={speciesNames.map(name=>name)}
+      freesolo="true"
+      loading={!speciesNames ? 'true' : 'false'}
+      renderInput={(params) => (
+        <TextField {...params} id="species-search" fullWidth value={sppSearchTerm} onChange={suggestName} variant="filled"
+      label="Search for a species or genus" placeholder="e.g. Ursus maritimus" />
+      )}
+    getOptionLabel={(option) => `${option}`}
+    renderOption={(option) => {
+      return <h5>{option}</h5>
+    }}
+    />
+
+      
+      {/* <TextField id="species-search" color="primary" fullWidth value={sppSearchTerm} onChange={suggestName} variant="filled"
+      label="Search for a species or genus" placeholder="e.g. Ursus maritimus" /> */}
 
       <ul id="species-list">
         {speciesNames
@@ -82,6 +104,7 @@ function Search(props) {
       </select>
       <button id="regional-search" className="searchButton" onClick={handleRegionalSearch}>Regional Search</button>
       <button id="global-search" className="searchButton" onClick={handleGlobalSearch}>Global Search</button>
+    </Grid>
     </div>
   );
 }

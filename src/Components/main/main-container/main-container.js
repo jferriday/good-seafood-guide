@@ -8,10 +8,11 @@ import {
 } from "../../api/gsgAPI";
 import Assessment from "../../assessment/Assessment";
 // Material UI Components
-import { AppBar, Typography, Grid, Container } from "@material-ui/core";
+import { AppBar, Typography, Box, Container } from "@material-ui/core";
 
 function MainContainer(props) {
   const [assessment, setAssessment] = useState(); // contains assessment results from IUCN
+  const [assessmentVisibility, setAssessmentVisibility] = useState(false);
 
   // function to handle search actions from the <Search /> component
 
@@ -21,6 +22,7 @@ function MainContainer(props) {
     results.status = await globalStatus(speciesName);
     console.log(results);
     setAssessment(results);
+    setAssessmentVisibility(true);
   };
 
   const regionalSearch = async (speciesName, region) => {
@@ -35,10 +37,11 @@ function MainContainer(props) {
   return (
     <div>
     <Container maxWidth="md">
-      <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
-
-      {assessment ? <Assessment data={assessment} /> : ""}
-      </Container>
+      <Box>
+        <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
+      </Box>
+        {assessment ? <Box mt={2}><Assessment data={assessment} visible={assessmentVisibility} /></Box> : ""}
+       </Container>
     </div>
   );
 }

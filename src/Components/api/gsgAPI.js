@@ -40,10 +40,11 @@ export async function globalStatus(species) {
 }
 
 export async function regionalAssessment(species, region) {
+    console.log(`Getting regional assessment for region ${region} and species ${species}`)
     const response = await fetch(encodeURI(`${endpoint}/redlist/threats/regional/${region}/${species}`));
     if (response.ok) {
+        console.log(response);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
         return jsonResponse;
     }else{
         return null;
@@ -53,8 +54,8 @@ export async function regionalAssessment(species, region) {
 export async function regionalStatus(species, region) {
     const response = await fetch(encodeURI(`${endpoint}/redlist/regional/${region}/${species}`));
     if(response.ok) {
+        console.log(response);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
         return jsonResponse;
     } else {
         return null;

@@ -30,8 +30,9 @@ function MainContainer(props) {
     results.threats = await regionalAssessment(speciesName, region);
     results.status = await regionalStatus(speciesName, region);
 
-    console.log(results);
+    console.log('Regional assessment:', results);
     setAssessment(results);
+    setAssessmentVisibility(true);
   };
 
   return (

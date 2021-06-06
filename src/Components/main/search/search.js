@@ -45,7 +45,7 @@ function Search(props) {
       globalSearch(sppSearchTerm);
   }
   const handleRegionalSearch = () => {
-      regionalSearch(species, region);
+      regionalSearch(sppSearchTerm, region);
   }
 
 

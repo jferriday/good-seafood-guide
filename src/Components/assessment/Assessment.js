@@ -1,5 +1,39 @@
 import {useState} from 'react';
-import {Slide, Card, Typography} from '@material-ui/core';
+import {Slide, Card, CardContent, CardHeader, Divider, Typography, makeStyles, StylesProvider} from '@material-ui/core';
+
+const statusCodes = {
+    'DD': 'Data Deficient',
+    'LC': 'Least Concern',
+    'NT': 'Near Threatened',
+    'VU': 'Vulnerable',
+    'EN': 'Endangered',
+    'CR': 'Critically Endangered',
+    'EW': 'Extinct In The Wild',
+    'EX': 'Extinct'
+}
+
+const statusColours = {
+    'DD': '#bfbfbf',
+    'LC': '#0066ff',
+    'NT': '#006666',
+    'VU': '#ff9900',
+    'EN': '#ff3333',
+    'CR': '#b30000',
+    'EW': '#999999',
+    'EX': '#999999'
+}
+
+const statusTextColours = {
+    'DD': '#000000',
+    'LC': '#ffffff',
+    'NT': '#ffffff',
+    'VU': '#000000',
+    'EN': '#ffffff',
+    'CR': '#ffffff',
+    'EW': '#e63900',
+    'EX': '#e63900'
+}
+
 
 function Assessment(props) {
     // species Redlist status and array of threats from MainContainer state:
@@ -9,38 +43,35 @@ function Assessment(props) {
     props.data ? threats = props.data.threats : threats = null;
     props.data ? status = props.data.status : status = null;
    
+    // use styles from hook for styling according to redlist status
+    const useStyles = makeStyles({
+        assessmentCard: props => {
+            return {
+                backgroundColor: statusColours[status.category],
+                color: statusTextColours[status.category]
+            };
+        }
+    })
+    const classes = useStyles();
 
-
-    const statusCodes = {
-        'DD': 'Data Deficient',
-        'LC': 'Least Concern',
-        'NT': 'Near Threatened',
-        'VU': 'Vulnerable',
-        'EN': 'Endangered',
-        'CR': 'Critically Endangered',
-        'EW': 'Extinct In The Wild',
-        'EX': 'Extinct'
-    }
-
-    const statusColours = {
-        'DD': '#bfbfbf',
-        'LC': '#0066ff',
-        'NT': '#006666',
-        'VU': '#ff9900',
-        'EN': '#ff3300',
-        'CR': '#b30000',
-        'EW': '#999999',
-        'EX': '#999999'
-    }
+    
     console.log(props);
     if (props.data) {
     return(
         <div>
             <Slide direction="up" in={props.visible}>
                 <Card>
-                    <Typography variant="h2" color="textPrimary">{status.common_name}</Typography><Typography variant="h4"color="textSecondary">{status.scientific_name}</Typography>
-                    <span className="status">{statusCodes[status.category]}</span>
-                    <Typography variant="h5" color="textPrimary">Population Trend: {status.population_trend}</Typography>
+                    <CardHeader  
+                    className={classes.assessmentCard} 
+                    title={statusCodes[status.category]}
+                    >
+                    </CardHeader>
+                    <CardContent>
+                    <Typography  variant="h2" color="textPrimary">{status.common_name}</Typography>
+                    <Typography variant="h4"color="textSecondary" gutterBottom>{status.scientific_name}</Typography>
+                    <Typography gutterBottom variant="h5" color="textPrimary">Population Trend: {status.population_trend}</Typography>
+                    <Divider />
+
                     <Typography variant="h5">Threats</Typography>
                         <ul>{threats.map(item => {
                             if(item.scope === "Whole (>90%)" || item.scope === "Majority (50-90%)"){
@@ -49,7 +80,9 @@ function Assessment(props) {
                             return <li className={threatScope} key={item.code}><Typography variant="body1">{item.title}</Typography></li>
                             }
                         })}</ul>
+                    <Divider />
                     <Typography variant="caption">Last Assessment: {status.assessment_date}</Typography>
+                    </CardContent>
                 </Card>
             </Slide>
         </div>

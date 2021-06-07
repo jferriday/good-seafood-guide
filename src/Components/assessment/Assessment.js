@@ -74,7 +74,7 @@ function Assessment(props) {
 
                     <Typography variant="h5">Threats</Typography>
                         <ul>{threats.map(item => {
-                            if(item.scope === "Whole (>90%)" || item.scope === "Majority (50-90%)"){
+                            if(item.scope === "Whole (>90%)" || item.scope === "Majority (50-90%)" || item.scope === null){
                                 let threatScope;
                                 item.scope === "Whole (>90%)" ? threatScope = 'major-threat' : threatScope = 'majority-threat';
                             return <li className={threatScope} key={item.code}><Typography variant="body1">{item.title}</Typography></li>

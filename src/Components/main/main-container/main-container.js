@@ -1,3 +1,4 @@
+import './maincontainer.css';
 import Search from "../search/Search";
 import { useState } from "react";
 import {
@@ -36,9 +37,9 @@ function MainContainer(props) {
   };
 
   return (
-    <div>
+    <div className="main">
     <Container maxWidth="md">
-      <Box>
+      <Box my={2}>
         <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
       </Box>
         {assessment ? <Box mt={2}><Assessment data={assessment} visible={assessmentVisibility} /></Box> : ""}

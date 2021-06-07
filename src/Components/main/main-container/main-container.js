@@ -9,7 +9,7 @@ import {
 } from "../../api/gsgAPI";
 import Assessment from "../../assessment/Assessment";
 // Material UI Components
-import { AppBar, Typography, Box, Container } from "@material-ui/core";
+import { AppBar, Typography, Box, Container, Grid } from "@material-ui/core";
 
 function MainContainer(props) {
   const [assessment, setAssessment] = useState(); // contains assessment results from IUCN
@@ -37,12 +37,18 @@ function MainContainer(props) {
   };
 
   return (
-    <div className="main">
-    <Container maxWidth="md">
-      <Box my={2}>
-        <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
-      </Box>
+    <div className="main"> 
+    <Container maxWidth="lg">
+      <Grid container spacing={5} align="center" justify="center">
+        <Grid item md={6}>
+          <Box my={2}>
+            <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
+          </Box>
+      </Grid>
+      <Grid item lg={6}>
         {assessment ? <Box mt={2}><Assessment data={assessment} visible={assessmentVisibility} /></Box> : ""}
+        </Grid>
+        </Grid>
        </Container>
     </div>
   );

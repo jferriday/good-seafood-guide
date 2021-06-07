@@ -1,0 +1,6 @@
+.main {
+    height: 100%;
+    background-image: url('../../../elehpant.jpg');
+    background-size:cover;
+    background-position: center;
+}

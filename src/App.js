@@ -1,7 +1,7 @@
 import MainContainer from './Components/main/main-container/main-container';
 import {ThemeProvider, Typography, AppBar, Toolbar, Hidden} from '@material-ui/core';
 import {createMuiTheme} from '@material-ui/core/styles';
-
+import './App.css';
 // Custom theme parameters for Material UI
 const theme = createMuiTheme({
 
@@ -33,8 +33,8 @@ function App() {
 
           </AppBar>
         </header>
-        <main>
-          <MainContainer />
+        <main className="main">
+          <MainContainer className="main-container" />
         </main>
       </ThemeProvider>
     </div>

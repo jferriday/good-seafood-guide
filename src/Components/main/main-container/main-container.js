@@ -56,9 +56,19 @@ function MainContainer(props) {
         <Grid item md={6}>
           <Paper elevation={3} className={classes.paper}>
           <Box my={2} p={3}>
+            <Typography variant="h4">Search for global or regional Red List assessments</Typography>
             <Search regionalSearch={regionalSearch} globalSearch={globalSearch} />
           </Box>
           </Paper>
+          <Typography variant="subtitle1">
+            Red List Info gives easy access to ICUN Red List assessments for thousands of species. Searcg for a species or genus
+            and select a region, or view global assessments.
+            </Typography>
+            <br/>
+            <Typography variant="subtitle2">
+            Assessment data is from IUCN (iucnredlist.org). Species names autocompletion comes from the Global Biodiversity Information Facility
+            (gbif.org).
+            </Typography>
       </Grid>
       <Grid item lg={6}>
         {assessment ? <Box mt={2}><Assessment data={assessment} visible={assessmentVisibility} opacity={classes.paper} /></Box> : ""}

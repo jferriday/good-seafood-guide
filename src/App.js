@@ -18,6 +18,16 @@ const theme = createMuiTheme({
         fontSize: '2.5rem',
         marginTop: '10px',
         marginBottom: '5px'
+      },
+      subtitle1: {
+        fontSize: "1.25rem",
+        color: 'white',
+        textAlign: 'left'
+      },
+      subtitle2: {
+        fontSize: "1rem",
+        color: 'white',
+        textAlign: 'left'
       }
     }  
 

@@ -18,7 +18,7 @@ export async function speciesSearch(term) {
 };
 
 export async function globalAssessment(species) {
-    const response = await fetch(encodeURI(`${endpoint}/redlist/threats/global/${species}`));
+    const response = await fetch(encodeURI(`${endpoint}/redlist/threats/global/${species}`)); // Returns global threats
     if (response.ok) {
         const jsonResponse = await response.json();
         console.log(jsonResponse);
@@ -28,7 +28,7 @@ export async function globalAssessment(species) {
     }
 }
 
-export async function globalStatus(species) {
+export async function globalStatus(species) { // returns global status
     const response = await fetch(encodeURI(`${endpoint}/redlist/global/${species}`));
     if (response.ok) {
         const jsonResponse = await response.json();
@@ -39,22 +39,23 @@ export async function globalStatus(species) {
     }
 }
 
-export async function regionalAssessment(species, region) {
+export async function regionalAssessment(species, region) { // returns regional threats
+    console.log(`Getting regional assessment for region ${region} and species ${species}`)
     const response = await fetch(encodeURI(`${endpoint}/redlist/threats/regional/${region}/${species}`));
     if (response.ok) {
+        console.log(response);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
         return jsonResponse;
     }else{
         return null;
     }
 };
 
-export async function regionalStatus(species, region) {
+export async function regionalStatus(species, region) { // returns regional assessment
     const response = await fetch(encodeURI(`${endpoint}/redlist/regional/${region}/${species}`));
     if(response.ok) {
+        console.log(response);
         const jsonResponse = await response.json();
-        console.log(jsonResponse);
         return jsonResponse;
     } else {
         return null;

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { speciesSearch } from "../../api/gsgAPI";
 
+import {Grid, Box, Button, TextField, InputLabel, Select, FormControl} from '@material-ui/core';
+import {Autocomplete} from  '@material-ui/lab';
+
 function Search(props) {
   const [region, setRegion] = useState();
   const [species, setSpecies] = useState();
@@ -13,8 +16,9 @@ function Search(props) {
 
   // timeout id used to cancel timeout when user adds more keystrokes
   let timeoutId = 0;
-  const suggestName = (e) => {
-      let name = e.target.value;
+  const suggestName = (e, val) => {
+    console.log('suggesting name')
+      let name = val;
       setSppSearchTerm(name)
       clearTimeout(timeoutId);
 
@@ -31,45 +35,53 @@ function Search(props) {
     console.log(`selected species ${species}`);
   };
   const handleRegionSelection = (e) => {
-      const region = document.getElementById("region-select").value;
+      const region = e.target.value;
       setRegion(region);
       console.log(region);
      
   }
   // functions to handle search using functions from <MainContainer /> when buttons are clicked
   const handleGlobalSearch = () => {
-      globalSearch(species);
+      globalSearch(sppSearchTerm);
   }
   const handleRegionalSearch = () => {
-      regionalSearch(species, region);
+      regionalSearch(sppSearchTerm, region);
   }
 
 
   return (
     <div>
-      <label htmlFor="species-search">Species or common name </label>
-      <input type="text" id="species-search" value={sppSearchTerm} onChange={suggestName} />
+      <Grid container direction="column">    
+      {/* <input type="text" id="species-search" placeholder="Enter a species or genus" value={sppSearchTerm} onChange={suggestName} /> */}
+      <Box my={1}>
+        <Autocomplete
+        id="species-autocomplete"
+        style={{width: 'auto'}}
+        options={speciesNames.map(name=>name)}
+        freesolo="true"
+        loading={!speciesNames ? 'true' : 'false'}
+        onInputChange={(event, newValue) => {
+          suggestName(event, newValue);
+        }}
+        renderInput={(params) => (
+          <TextField {...params} id="species-search" fullWidth value={sppSearchTerm} variant="filled"
+        label="Search for a species or genus" placeholder="e.g. Ursus maritimus" />
+        )}
+      getOptionLabel={(option) => `${option}`}
+      renderOption={(option) => {
+        return <h5>{option}</h5>
+      }}
+      />
+    </Box>
 
-      <ul id="species-list">
-        {speciesNames
-          ? speciesNames.map((suggestion, i) => {
-              return (
-                <li key={i}>
-                  <button
-                    value={suggestion}
-                    className="speciesSelection"
-                    onClick={handleSpeciesSelection}
-                  >
-                    {suggestion}
-                  </button>
-                </li>
-              );
-            })
-          : ""}
-      </ul>
-      <label htmlFor="region-search">Region </label>
-      <select name="region" id="region-select" onChange={handleRegionSelection}>
-        <option value="none" selected disabled hidden>Select a region</option>
+    
+      {/* <TextField id="species-search" color="primary" fullWidth value={sppSearchTerm} onChange={suggestName} variant="filled"
+      label="Search for a species or genus" placeholder="e.g. Ursus maritimus" /> */}
+      <Box mb={1} flexGrow={1}>
+      <FormControl variant="filled" fullWidth={true}>
+      <InputLabel htmlFor="region-search">Region:  </InputLabel>
+      <Select native defaultValue='Search by Region' variant="filled" onChange={handleRegionSelection}>
+        <option value="none" hidden selected >Select a region</option>
         <option value="northeastern_africa">Northeastern Africa</option>
         <option value="eastern_africa">Eastern Africa</option>
         <option value="western_africa">Western Africa</option>
@@ -79,9 +91,18 @@ function Search(props) {
         <option value="southern africa">Southern Africa</option>
         <option value="mediterranean">Mediterranean</option>
         <option value="europe">Europe</option>
-      </select>
-      <button id="regional-search" className="searchButton" onClick={handleRegionalSearch}>Regional Search</button>
-      <button id="global-search" className="searchButton" onClick={handleGlobalSearch}>Global Search</button>
+        </Select>
+        </FormControl>
+        </Box>
+        <Box m={1} display="flex" justifyContent="center" alignContent="flex-start">
+          <Box mr={2}>
+      <Button id="regional-search" color="primary" variant="outlined" onClick={handleRegionalSearch}>Regional Search</Button>
+      </Box>
+      <Box mr={2}>
+      <Button id="global-search" color="primary" variant="outlined" onClick={handleGlobalSearch}>Global Search</Button>
+      </Box>
+      </Box>
+    </Grid>
     </div>
   );
 }

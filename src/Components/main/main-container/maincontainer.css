@@ -1,0 +1,6 @@
+.main {min-height: calc(100vh - 50px);
+    height: auto;
+    background-image: url('../../../elehpant.jpg');
+    background-size: cover;
+    background-position: center;
+}

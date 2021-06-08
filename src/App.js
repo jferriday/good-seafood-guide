@@ -13,6 +13,13 @@ const theme = createMuiTheme({
         main: '#b0bec5',
       },
     },
+    typography: {
+      h1: {
+        fontSize: '2.5rem',
+        marginTop: '10px',
+        marginBottom: '5px'
+      }
+    }  
 
 });
 
@@ -22,12 +29,12 @@ function App() {
       <ThemeProvider theme={theme}> 
         <header className="App-header">
         <AppBar position="sticky">
-          <Toolbar>
+          <Toolbar padding={1}>
               <Hidden xsDown>
-              <Typography align="left" className="textPrimary" variant="h3" component="h1">red list info.</Typography>
+              <Typography align="left" className="textPrimary" variant="h1">red list info.</Typography>
               </Hidden>
               <Hidden smUp>
-              <Typography align="left" color="white" variant="h3" component="h1">rli.</Typography>
+              <Typography align="left" color="white" variant="h1">red list info</Typography>
               </Hidden>
             </Toolbar>
 

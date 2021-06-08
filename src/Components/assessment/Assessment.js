@@ -48,9 +48,9 @@ function Assessment(props) {
         assessmentCard: props => {
             return {
                 backgroundColor: statusColours[status.category],
-                color: statusTextColours[status.category]
+                color: statusTextColours[status.category],
             };
-        }
+        },
     })
     const classes = useStyles();
 
@@ -60,7 +60,7 @@ function Assessment(props) {
     return(
         <div>
             <Slide direction="up" in={props.visible}>
-                <Card>
+                <Card style={{opacity: 0.9}}>
                     <CardHeader  
                     className={classes.assessmentCard} 
                     title={statusCodes[status.category]}

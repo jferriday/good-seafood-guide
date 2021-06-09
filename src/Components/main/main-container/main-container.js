@@ -61,7 +61,7 @@ function MainContainer(props) {
           </Box>
           </Paper>
           <Typography variant="subtitle1">
-            Red List Info gives easy access to ICUN Red List assessments for thousands of species. Searcg for a species or genus
+            Red List Info gives easy access to ICUN Red List assessments for thousands of species. Search for a species or genus
             and select a region, or view global assessments.
             </Typography>
             <br/>

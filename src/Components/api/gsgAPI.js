@@ -1,5 +1,4 @@
-const dotenv = require('dotenv').config();
-const endpoint = 'http://localhost:4000'
+const endpoint = 'https://redlist-info-backend.herokuapp.com'
 export async function speciesSearch(term) {
     // contacts the server when user is typing and returns a list of suggestions
     const response = await fetch(`${endpoint}/nameSearch?name=${term}`);

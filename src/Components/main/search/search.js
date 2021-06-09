@@ -6,7 +6,6 @@ import {Autocomplete} from  '@material-ui/lab';
 
 function Search(props) {
   const [region, setRegion] = useState();
-  const [species, setSpecies] = useState();
   const [speciesNames, setSpeciesNames] = useState([]);
   const [sppSearchTerm, setSppSearchTerm] = useState("");
 
@@ -27,13 +26,7 @@ function Search(props) {
       setSpeciesNames(speciesArr);
     }, 500);
   };
-  // sets the species in state to the selected option when clicked
-  const handleSpeciesSelection = (e) => {
-    setSpecies(e.target.value);
-    setSppSearchTerm(e.target.value);
-
-    console.log(`selected species ${species}`);
-  };
+  
   const handleRegionSelection = (e) => {
       const region = e.target.value;
       setRegion(region);

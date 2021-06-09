@@ -1,5 +1,4 @@
-import {useState} from 'react';
-import {Slide, Card, CardContent, CardHeader, Divider, Typography, makeStyles, StylesProvider} from '@material-ui/core';
+import {Slide, Card, CardContent, CardHeader, Divider, Typography, makeStyles} from '@material-ui/core';
 
 const statusCodes = {
     'DD': 'Data Deficient',
@@ -78,6 +77,8 @@ function Assessment(props) {
                                 let threatScope;
                                 item.scope === "Whole (>90%)" ? threatScope = 'major-threat' : threatScope = 'majority-threat';
                             return <li className={threatScope} key={item.code}><Typography variant="body1">{item.title}</Typography></li>
+                            } else {
+                                return '';
                             }
                         })}</ul>
                     <Divider />

@@ -9,7 +9,7 @@ import {
 } from "../../api/gsgAPI";
 import Assessment from "../../assessment/Assessment";
 // Material UI Components
-import { Paper, AppBar, Typography, Box, Container, Grid } from "@material-ui/core";
+import { Paper, Typography, Box, Container, Grid } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 
 function MainContainer(props) {
